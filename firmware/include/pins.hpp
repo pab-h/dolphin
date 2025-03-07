@@ -1,0 +1,18 @@
+#ifndef PINS_HEADER
+
+#define PINS_HEADER
+
+#include <Arduino.h>
+
+#define LEFT_BUTTON_PIN 13
+#define RIGHT_BUTTON_PIN 12
+
+#define HALL_SENSOR_PIN 8
+
+#define DISPLAY_DISTANCE_CLOCK_PIN 5
+#define DISPLAY_DISTANCE_DATA_PIN 4
+
+#define DISPLAY_VELOCITY_CLOCK_PIN 3
+#define DISPLAY_VELOCITY_DATA_PIN 2
+
+#endif
