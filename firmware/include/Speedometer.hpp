@@ -30,7 +30,6 @@ class Speedometer {
         void ISRHallSensorHit();
         
         float getVelocity();
-        void updateVelocity();
 
     };
 
