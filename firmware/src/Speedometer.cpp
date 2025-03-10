@@ -15,9 +15,10 @@ Speedometer::Speedometer() {
     this->hitHallSensorPeriod      = 0;
     
     this->lastMeasureTime = 0;
-
     this->resetTimeThreshold =  RESET_VELOCITY_TIME_SECONDS;
     this->resetTimeThreshold *= SECONDS_TO_MICROSECONDS;
+
+    this->isNewDataAvailable = false;
 
 }
 
@@ -66,13 +67,13 @@ void Speedometer::updateVelocity() {
         this->hitHallSensorPeriod  = this->currentHitHallSensorTime;
         this->hitHallSensorPeriod -= this->lastHitHallSensorTime;
 
-        this->isNewDataAvailable = false;
-
-        interrupts();
-
         this->velocity  = this->circumferenceSize;
         this->velocity /= (float) this->hitHallSensorPeriod;
         this->velocity /= (float) MICROSECONDS_TO_SECOUNDS * SECONDS_TO_HOURS;
+
+        this->isNewDataAvailable = false;
+
+        interrupts();
     }
 
 }
