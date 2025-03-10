@@ -7,15 +7,15 @@ class Speedometer {
     private:
 
         float radius;
-        volatile float circumferenceSize;
-        volatile float velocity;
+        float circumferenceSize;
+        float velocity;
         
         volatile unsigned long lastHitHallSensorTime;
         volatile unsigned long currentHitHallSensorTime;
-        volatile unsigned long hitHallSensorPeriod;
+        unsigned long hitHallSensorPeriod;
         
         volatile unsigned long lastMeasureTime;
-        volatile unsigned long resetTimeThreshold;
+        unsigned long resetTimeThreshold;
 
         volatile bool isNewDataAvailable;
 
@@ -33,7 +33,5 @@ class Speedometer {
         void updateVelocity();
 
     };
-
-    void ISRHallSensorHitWrapper();
 
 #endif
