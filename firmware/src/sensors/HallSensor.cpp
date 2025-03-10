@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "pins.hpp"
-#include "HallSensor.hpp"
+#include "sensors/HallSensor.hpp"
 
 HallSensor::HallSensor() {
     this->pin = HALL_SENSOR_PIN;

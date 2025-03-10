@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "Speedometer.hpp"
+#include "meters/Speedometer.hpp"
 #include "constants.hpp"
 #include "config.hpp"
 

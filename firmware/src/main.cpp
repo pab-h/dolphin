@@ -2,15 +2,23 @@
 
 #include "setup.hpp"
 #include "config.hpp"
+#include "pins.hpp"
 
-#include "Speedometer.hpp"
-#include "HallSensor.hpp"
-#include "Hodometer.hpp"
+#include "sensors/HallSensor.hpp"
+
+#include "meters/Speedometer.hpp"
+#include "meters/Hodometer.hpp"
+
+#include "displays/SpeedDisplay.hpp"
+#include "displays/DistanceDisplay.hpp"
+
+HallSensor hallSensor;
 
 Speedometer speedometer;
 Hodometer hodometer;
 
-HallSensor hallSensor;
+SpeedDisplay speedDisplay(&speedometer);
+DistanceDisplay distanceDisplay(&hodometer);
 
 void ISRHallSensorHitWrapper() {
     
@@ -21,9 +29,10 @@ void ISRHallSensorHitWrapper() {
 
 void setup() {
 
-    Serial.begin(9600);
-
     setupPins();
+
+    distanceDisplay.setup();
+    speedDisplay.setup();
 
     attachInterrupt(
         digitalPinToInterrupt(HALL_SENSOR_PIN),
@@ -31,22 +40,19 @@ void setup() {
         RISING 
     );
 
-    speedometer.setRadius(33);
     hodometer.setRadius(33);
+    speedometer.setRadius(33);
 
 }
 
 
 void loop() {
 
-    Serial.print("Velocidade = ");
-    Serial.print(speedometer.getVelocity());
-    Serial.print(" km/h ");
+    delay(500);
 
-    Serial.print("Distância = ");
-    Serial.print(hodometer.getDistance());
-    Serial.print(" km\n");
-    
+    speedDisplay.update();
+    distanceDisplay.update();
+
     speedometer.resetTrigger();
     hodometer.resetTrigger();
 
