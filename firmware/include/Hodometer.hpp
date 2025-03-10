@@ -26,7 +26,6 @@ class Hodometer {
         void ISRHallSensorHit();
         
         float getDistance();
-        void updateDistance();
 
     };
 

@@ -47,12 +47,7 @@ void loop() {
     Serial.print(hodometer.getDistance());
     Serial.print(" km\n");
     
-    speedometer.updateVelocity();
-    hodometer.updateDistance();
-    
     speedometer.resetTrigger();
     hodometer.resetTrigger();
-
-    delay(1000);
 
 }
