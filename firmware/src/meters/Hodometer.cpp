@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "Hodometer.hpp"
+#include "meters/Hodometer.hpp"
 #include "constants.hpp"
 #include "config.hpp"
 
