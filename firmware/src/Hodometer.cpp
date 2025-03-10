@@ -44,12 +44,9 @@ void Hodometer::resetTrigger() {
 }
 
 void Hodometer::ISRHallSensorHit() {
-    noInterrupts();
-
+    
     this->lastMeasureTime = micros();
     this->distance += this->circumferenceSize;
-
-    interrupts();
 
 }
 

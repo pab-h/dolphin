@@ -48,7 +48,6 @@ void Speedometer::resetTrigger() {
 
 
 void Speedometer::ISRHallSensorHit() {
-    noInterrupts();
 
     this->lastHitHallSensorTime    = this->currentHitHallSensorTime;
     this->currentHitHallSensorTime = micros();
@@ -62,8 +61,6 @@ void Speedometer::ISRHallSensorHit() {
         this->velocity /= (float) this->hitHallSensorPeriod;
         this->velocity /= (float) MICROSECONDS_TO_SECOUNDS * SECONDS_TO_HOURS;
     }
-
-    interrupts();
 
 }
 
