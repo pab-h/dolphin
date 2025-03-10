@@ -1,18 +1,14 @@
-#ifndef SPEEDOMETER_HEADER
+#ifndef HODOMETER_HEADER
 
-#define SPEEDOMETER_HEADER
+#define HODOMETER_HEADER
 
-class Speedometer {
+class Hodometer {
 
     private:
 
         float radius;
         float circumferenceSize;
-        float velocity;
-        
-        volatile unsigned long lastHitHallSensorTime;
-        volatile unsigned long currentHitHallSensorTime;
-        unsigned long hitHallSensorPeriod;
+        float distance;
         
         volatile unsigned long lastMeasureTime;
         unsigned long resetTimeThreshold;
@@ -23,14 +19,14 @@ class Speedometer {
 
     public:
 
-        Speedometer();
+        Hodometer();
 
         void setRadius(float radius);        
         void resetTrigger();
         void ISRHallSensorHit();
         
-        float getVelocity();
-        void updateVelocity();
+        float getDistance();
+        void updateDistance();
 
     };
 
