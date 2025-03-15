@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #include "meters/Speedometer.hpp"
+
 #include "constants.hpp"
 #include "config.hpp"
 
@@ -15,8 +16,6 @@ Speedometer::Speedometer() {
     this->hitHallSensorPeriod      = 0;
     
     this->lastMeasureTime = 0;
-    this->resetTimeThreshold =  RESET_VELOCITY_TIME_SECONDS;
-    this->resetTimeThreshold *= SECONDS_TO_MICROSECONDS;
 
     this->isNewDataAvailable = false;
 
@@ -40,7 +39,7 @@ void Speedometer::setRadius(float radius) {
 
 void Speedometer::resetTrigger() {
 
-    if (micros() - this->lastMeasureTime > this->resetTimeThreshold) {
+    if (micros() - this->lastMeasureTime > RESET_VELOCITY_THRESHOLD) {
         this->velocity = 0;
     }
 

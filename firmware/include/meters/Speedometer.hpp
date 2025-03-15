@@ -15,7 +15,6 @@ class Speedometer {
         unsigned long hitHallSensorPeriod;
         
         volatile unsigned long lastMeasureTime;
-        unsigned long resetTimeThreshold;
 
         volatile bool isNewDataAvailable;
 
