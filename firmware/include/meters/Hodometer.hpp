@@ -11,7 +11,6 @@ class Hodometer {
         float distance;
         
         volatile unsigned long lastMeasureTime;
-        unsigned long resetTimeThreshold;
 
         volatile bool isNewDataAvailable;
 
@@ -22,7 +21,6 @@ class Hodometer {
         Hodometer();
 
         void setRadius(float radius);        
-        void resetTrigger();
         void ISRHallSensorHit();
         
         float getDistance();

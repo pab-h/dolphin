@@ -11,8 +11,6 @@ Hodometer::Hodometer() {
     this->distance          = 0;
 
     this->lastMeasureTime = 0;
-    this->resetTimeThreshold =  RESET_DISTANCE_TIME_SECONDS;
-    this->resetTimeThreshold *= SECONDS_TO_MICROSECONDS;
 
     this->isNewDataAvailable = false;
 
@@ -33,14 +31,6 @@ void Hodometer::setRadius(float radius) {
         this->updateCircumferenceSize();
     }
     
-}
-
-void Hodometer::resetTrigger() {
-
-    if (micros() - this->lastMeasureTime > this->resetTimeThreshold) {
-        this->distance = 0;
-    }
-
 }
 
 void Hodometer::ISRHallSensorHit() {
