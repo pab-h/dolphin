@@ -16,7 +16,7 @@ class DistanceDisplay {
 
     public:
 
-        DistanceDisplay(Hodometer* speedometer);
+        DistanceDisplay(Hodometer* hodometer);
         ~DistanceDisplay();
 
         void setup();
