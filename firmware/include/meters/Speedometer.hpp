@@ -22,7 +22,7 @@ class Speedometer {
 
     public:
 
-        Speedometer();
+        Speedometer(uint8_t radius);
 
         void setRadius(float radius);        
         void resetTrigger();

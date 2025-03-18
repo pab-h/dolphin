@@ -4,9 +4,9 @@
 #include "constants.hpp"
 #include "config.hpp"
 
-Hodometer::Hodometer() {
+Hodometer::Hodometer(uint8_t radius) {
 
-    this->radius            = 0;
+    this->radius            = radius;
     this->circumferenceSize = 0;
     this->distance          = 0;
 

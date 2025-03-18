@@ -5,9 +5,9 @@
 #include "constants.hpp"
 #include "config.hpp"
 
-Speedometer::Speedometer() {
+Speedometer::Speedometer(uint8_t radius) {
 
-    this->radius            = 0;
+    this->radius            = (float) radius;
     this->circumferenceSize = 0;
     this->velocity          = 0;
     
