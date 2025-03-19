@@ -11,28 +11,32 @@ System::System() {
     this->hallSensor = new HallSensor();
 
     this->speedometer = new Speedometer(this->radius);
-    this->hodometer = new Hodometer(this->radius);
+    this->hodometer   = new Hodometer(this->radius);
 
-    this->speedDisplay = new SpeedDisplay(this->speedometer);
+    this->speedDisplay    = new SpeedDisplay(this->speedometer);
     this->distanceDisplay = new DistanceDisplay(this->hodometer);
+    this->configDisplay   = new ConfigDisplay(&this->radius);
 
-    this->leftButton = new PushButtonSensor(LEFT_BUTTON_PIN);
+    this->leftButton  = new PushButtonSensor(LEFT_BUTTON_PIN);
     this->rightButton = new PushButtonSensor(RIGHT_BUTTON_PIN);
 
     this->lastConfigState = false;
-    this->configState = false;
+    this->configState     = false;
 
 }
 
 System& System::getInstance() {
+
     if (!System::instance) {
         System::instance = new System();
     }
 
     return *System::instance;
+
 }
 
 System::~System() {
+
     delete hallSensor;
     delete speedometer;
     delete hodometer;
@@ -44,6 +48,7 @@ System::~System() {
     if (System::instance == this) {
         System::instance = nullptr;
     }
+
 }
 
 void System::setupListeners() {
@@ -73,29 +78,19 @@ void System::toggleConfigMode() {
     this->lastConfigState = configState;
     this->configState = !configState;
 
-    Serial.print("Modo de configuração = ");
-    Serial.print(this->configState ? "ativado" : "desativado");
-    Serial.print("\n");
-
     if (this->configState) {
-
-        Serial.print("Tamanho do raio atual: R = ");
-        Serial.print(this->radius);
-        Serial.print("cm");
-        Serial.print("\n");
-
+        this->configDisplay->setup();
     }
 
     if (this->lastConfigState && !this->configState) {
 
-        Serial.print("Atualizando o tamanho do raio: R = ");
-        Serial.print(this->radius);
-        Serial.print("cm");
-        Serial.print("\n");
-
         EEPROM.write(RADIUS_EEPROM_ADDRESS, this->radius);
+
         this->hodometer->setRadius(this->radius);
         this->speedometer->setRadius(this->radius);
+
+        this->configDisplay->done();
+        delay(500);
 
     }
 
@@ -106,10 +101,6 @@ void System::onLeftClick() {
     if (!this->configState) return;
 
     this->radius++;
-    Serial.print("Tamanho do raio atual: R = ");
-    Serial.print(this->radius);
-    Serial.print("cm");
-    Serial.print("\n");
 
 }
 
@@ -119,11 +110,6 @@ void System::onRightClick() {
 
     this->radius--;
 
-    Serial.print("Tamanho do raio atual: R = ");
-    Serial.print(this->radius);
-    Serial.print("cm");
-    Serial.print("\n");
-
 }
 
 void System::run() {
@@ -131,4 +117,17 @@ void System::run() {
     this->leftButton->read();
     this->rightButton->read();
     
+    if (this->configState) {
+        this->configDisplay->update();
+    } 
+    
+    if (!this->configState) {
+
+        this->distanceDisplay->update();
+        this->speedDisplay->update();
+
+    }
+    
+    this->speedometer->resetTrigger();
+
 }

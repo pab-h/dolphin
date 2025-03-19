@@ -13,6 +13,7 @@
 
 #include "displays/SpeedDisplay.hpp"
 #include "displays/DistanceDisplay.hpp"
+#include "displays/ConfigDisplay.hpp"
 
 class System {
 
@@ -25,6 +26,7 @@ class System {
 
         SpeedDisplay*    speedDisplay;
         DistanceDisplay* distanceDisplay;
+        ConfigDisplay*   configDisplay;
 
         PushButtonSensor* leftButton;
         PushButtonSensor* rightButton;
