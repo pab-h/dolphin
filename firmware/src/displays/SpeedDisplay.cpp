@@ -36,7 +36,7 @@ void SpeedDisplay::setup() {
 void SpeedDisplay::update() {
 
     this->display->showNumberDecEx(
-        this->speedometer->getVelocity() * 100,
+        (int) this->speedometer->getVelocity() * 100,
         0b01000000,
         true
     );
