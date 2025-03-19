@@ -24,7 +24,7 @@ void Hodometer::updateCircumferenceSize() {
 }
 
 
-void Hodometer::setRadius(float radius) {
+void Hodometer::setRadius(uint8_t radius) {
 
     if (radius > 0) {
         this->radius = radius;
@@ -42,4 +42,8 @@ void Hodometer::ISRHallSensorHit() {
 
 float Hodometer::getDistance() {
     return this->distance;
+}
+
+void Hodometer::reset() {
+    this->distance = 0;
 }

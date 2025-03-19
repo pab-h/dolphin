@@ -24,11 +24,12 @@ class Speedometer {
 
         Speedometer(uint8_t radius);
 
-        void setRadius(float radius);        
+        void setRadius(uint8_t radius);        
+        float getVelocity();
         void resetTrigger();
+ 
         void ISRHallSensorHit();
         
-        float getVelocity();
 
     };
 

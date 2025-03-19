@@ -54,6 +54,7 @@ System::~System() {
 void System::setupListeners() {
 
     this->leftButton->addLongPressListener(System::staticToggleConfigMode);
+    
     this->leftButton->addClickListener(System::staticOnLeftClick);
     this->rightButton->addClickListener(System::staticOnRightClick);
 
@@ -98,7 +99,9 @@ void System::toggleConfigMode() {
 
 void System::onLeftClick() {
 
-    if (!this->configState) return;
+    if (!this->configState) {
+        return;
+    }
 
     this->radius++;
 
@@ -106,9 +109,19 @@ void System::onLeftClick() {
 
 void System::onRightClick() {
 
-    if (!this->configState || this->radius == 1) return;
 
-    this->radius--;
+    if (this->configState) {
+
+        if (this->radius == 1) {
+            return;
+        }
+
+        this->radius--;
+
+        return;
+    }
+
+    this->hodometer->reset();
 
 }
 
@@ -118,16 +131,15 @@ void System::run() {
     this->rightButton->read();
     
     if (this->configState) {
+
         this->configDisplay->update();
+        return;
+
     } 
     
-    if (!this->configState) {
+    this->distanceDisplay->update();
+    this->speedDisplay->update();
 
-        this->distanceDisplay->update();
-        this->speedDisplay->update();
-
-    }
-    
     this->speedometer->resetTrigger();
 
 }
