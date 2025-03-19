@@ -1,15 +1,15 @@
-#ifndef DISTANCEDISPLAY_HEADER
+#ifndef DISTANCE_DISPLAY_HEADER
 
 #include "TM1637Display.h"
 #include "meters/Hodometer.hpp"
 
-#define DISTANCEDISPLAY_HEADER
+#define DISTANCE_DISPLAY_HEADER
 
 class DistanceDisplay {
     private:
 
-        int clockPin;
-        int dioPin;
+        uint8_t clockPin;
+        uint8_t dioPin;
 
         TM1637Display* display;
         Hodometer* hodometer;
