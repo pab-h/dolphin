@@ -5,11 +5,12 @@
 class HallSensor {
     private: 
 
-        int pin;
+        uint8_t pin;
 
     public:
 
         HallSensor();
+        
         bool read(); 
 
     };

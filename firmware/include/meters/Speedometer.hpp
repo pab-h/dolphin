@@ -15,7 +15,6 @@ class Speedometer {
         unsigned long hitHallSensorPeriod;
         
         volatile unsigned long lastMeasureTime;
-        unsigned long resetTimeThreshold;
 
         volatile bool isNewDataAvailable;
 
@@ -23,7 +22,7 @@ class Speedometer {
 
     public:
 
-        Speedometer();
+        Speedometer(uint8_t radius);
 
         void setRadius(float radius);        
         void resetTrigger();

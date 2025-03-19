@@ -36,7 +36,7 @@ void DistanceDisplay::setup() {
 void DistanceDisplay::update() {
 
     this->display->showNumberDecEx(
-        this->hodometer->getDistance() * 100,
+        (int) this->hodometer->getDistance() * 100,
         0b01000000,
         true
     );

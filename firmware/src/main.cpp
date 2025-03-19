@@ -1,59 +1,35 @@
 #include <Arduino.h>
 
-#include "setup.hpp"
-#include "config.hpp"
+#include "System.hpp"
 #include "pins.hpp"
 
-#include "sensors/HallSensor.hpp"
-
-#include "meters/Speedometer.hpp"
-#include "meters/Hodometer.hpp"
-
-#include "displays/SpeedDisplay.hpp"
-#include "displays/DistanceDisplay.hpp"
-
-HallSensor hallSensor;
-
-Speedometer speedometer;
-Hodometer hodometer;
-
-SpeedDisplay speedDisplay(&speedometer);
-DistanceDisplay distanceDisplay(&hodometer);
+System& sys = System::getInstance();
 
 void ISRHallSensorHitWrapper() {
-    
-    hodometer.ISRHallSensorHit();
-    speedometer.ISRHallSensorHit();
-
+  sys.ISRHallSensorHit();
 }
 
 void setup() {
 
-    setupPins();
+  Serial.begin(9600);
 
-    distanceDisplay.setup();
-    speedDisplay.setup();
+  setupPins();
 
-    attachInterrupt(
-        digitalPinToInterrupt(HALL_SENSOR_PIN),
-        ISRHallSensorHitWrapper,
-        RISING 
-    );
+  sys.setupDisplays();
 
-    hodometer.setRadius(33);
-    speedometer.setRadius(33);
+  attachInterrupt(
+    digitalPinToInterrupt(HALL_SENSOR_PIN),
+    ISRHallSensorHitWrapper,
+    RISING 
+  );
+
+  sys.setupListeners();
 
 }
 
 
 void loop() {
 
-    delay(500);
-
-    speedDisplay.update();
-    distanceDisplay.update();
-
-    speedometer.resetTrigger();
-    hodometer.resetTrigger();
+  sys.run(); 
 
 }
