@@ -1,0 +1,14 @@
+#include "constants.hpp"
+
+#ifndef CONFIG_HEADER
+
+#define CONFIG_HEADER
+
+#define RESET_VELOCITY_THRESHOLD 5 * SECONDS_TO_MICROSECONDS
+
+#define RADIUS_EEPROM_ADDRESS 0x00
+
+#define LONG_PRESS_THRESHOLD  1000
+#define CLICK_PRESS_THRESHOLD  250
+
+#endif
