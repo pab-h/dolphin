@@ -28,7 +28,7 @@ void Speedometer::updateCircumferenceSize() {
 
 }
 
-void Speedometer::setRadius(float radius) {
+void Speedometer::setRadius(uint8_t radius) {
 
     if (radius > 0) {
         this->radius = radius;

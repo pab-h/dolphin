@@ -20,10 +20,12 @@ class Hodometer {
 
         Hodometer(uint8_t radius);
 
-        void setRadius(float radius);        
-        void ISRHallSensorHit();
-        
+        void setRadius(uint8_t radius);        
         float getDistance();
+
+        void ISRHallSensorHit();
+
+        void reset();
 
     };
 
